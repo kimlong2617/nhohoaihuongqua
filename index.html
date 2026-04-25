@@ -7,9 +7,9 @@
 </head>
 
 <body>
-<video id="bgMusic" loop style="display:none;">
-  <source src="CMNDTCT.mp4" type="video/mp4">
-</video>
+<audio id="bgMusic" loop>
+  <source src="CMNDTCTmp3.mp3" type="audio/mpeg">
+</audio>
 <!-- Màn hình vào -->
 <div id="enter-screen">
   <h1>For You 💖</h1>
@@ -163,7 +163,9 @@ void heart.offsetHeight;
 heart.classList.add("fall");
 
 /* 🎵 phát nhạc */
-document.getElementById("bgMusic").play();
+document.getElementById("enter-screen").onclick = function(){
+  document.getElementById("bgMusic").play();
+}
 }
 ;
 </script>
