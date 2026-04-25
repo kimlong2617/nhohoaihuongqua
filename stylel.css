@@ -1,0 +1,222 @@
+/* ===== BODY ===== */
+body{
+background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+font-family: Arial;
+text-align: center;
+overflow: hidden;
+}
+
+/* ===== ENTER SCREEN ===== */
+#enter-screen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg, #ff9a9e, #fad0c4);
+color:white;
+z-index:999;
+cursor:pointer;
+animation: fadeEnter 1.5s ease;
+}
+
+#enter-screen h1{
+font-size:50px;
+text-shadow:0 0 15px #fff, 0 0 30px #ff4d6d;
+}
+
+#enter-screen p{
+margin-top:10px;
+animation: floatText 2s infinite;
+}
+
+@keyframes fadeEnter{
+0%{opacity:0;}
+100%{opacity:1;}
+}
+
+@keyframes floatText{
+0%{transform:translateY(0);}
+50%{transform:translateY(-5px);}
+100%{transform:translateY(0);}
+}
+
+/* ===== CONTAINER ===== */
+.container{
+width:350px;
+margin:50px auto;
+background:white;
+border-radius:30px;
+padding:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+animation: zoomIn 1.2s ease;
+}
+
+@keyframes zoomIn{
+0%{opacity:0; transform:scale(0.8);}
+100%{opacity:1; transform:scale(1);}
+}
+
+/* ===== IMAGE ===== */
+.image-box{
+position:relative;
+}
+
+.image-box img{
+width:280px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+transition:0.3s;
+}
+
+.image-box img:hover{
+transform:scale(1.05);
+}
+
+/* ===== SPARKLE ===== */
+.image-box::after{
+content:"✨ ✨ ✨";
+position:absolute;
+top:-15px;
+left:30px;
+opacity:0.6;
+animation:sparkle 3s infinite;
+}
+
+@keyframes sparkle{
+0%{opacity:0.2;}
+50%{opacity:0.7;}
+100%{opacity:0.2;}
+}
+
+/* ===== BUTTON ===== */
+button{
+margin-top:20px;
+padding:12px 25px;
+border:none;
+border-radius:20px;
+background:#ff4d6d;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+/* ===== TEXT ===== */
+#msg{
+margin-top:15px;
+font-size:18px;
+color:#ff4d6d;
+}
+
+/* ===== GIFT ===== */
+.gift{
+font-size:50px;
+cursor:pointer;
+margin-top:15px;
+transition:0.3s;
+}
+
+.gift:hover{
+transform:scale(1.2) rotate(10deg);
+}
+#bigHeart{
+position: fixed;
+top: -450px;
+left: 50%;
+transform: translateX(-50%);
+font-size: 22px;
+font-family: monospace;
+opacity: 0;
+pointer-events: none;
+z-index: 99999;
+}
+
+#bigHeart pre{
+margin:0;
+animation: heartbeat 1s infinite;
+}
+
+#bigHeart.fall{
+animation: dropHeart 5s linear forwards;
+}
+
+@keyframes dropHeart{
+0%{
+top:-450px;
+opacity:1;
+}
+
+100%{
+top:110vh;
+opacity:0;
+}
+}
+
+@keyframes heartbeat{
+0%,100%{scale:1;}
+50%{scale:1.08;}
+}
+/* ===== CONTAINER ===== */
+#heart-container,
+#photo-surprise{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200vh; /* cho scroll thoải mái */
+  pointer-events: none;
+}
+
+/* ===== TIM ===== */
+.flying-heart{
+  position: absolute;
+  animation: explode 0.8s ease-out forwards, fall 3s linear forwards;
+}
+
+/* 💥 nổ ra */
+@keyframes explode{
+  0%{
+    transform: translate(0,0) scale(1);
+    opacity: 1;
+  }
+  100%{
+    transform: translate(var(--x), var(--y)) scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* 🌧 rơi xuống */
+@keyframes fall{
+  0%{
+    transform: translate(var(--x), var(--y));
+  }
+  100%{
+    transform: translate(var(--x), calc(var(--y) + 400px));
+    opacity: 0;
+  }
+}
+
+/* ===== ẢNH ===== */
+.surprise-img{
+  position: absolute;
+  width: 140px;
+  height: 150px; 
+  object-fit: cover; 
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  opacity: 0;
+  transition: transform 1s ease, opacity 1s ease;
+}
+
+/* ===== SCROLL ===== */
+body{
+  overflow-y: auto;
+}

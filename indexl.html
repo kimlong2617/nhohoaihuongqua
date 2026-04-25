@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+<link rel="stylesheet" href="stylel.css">
+</head>
+
+<body>
+<video id="bgMusic" loop style="display:none;">
+  <source src="CMNDTCT.mp4" type="video/mp4">
+</video>
+<!-- Màn hình vào -->
+<div id="enter-screen">
+  <h1>For You 💖</h1>
+  <p>Click to enter</p>
+</div>
+
+<!-- Nội dung chính -->
+<div class="container">
+
+<h1>To My Love 💖</h1>
+
+<div class="image-box">
+  <img src="lhp1.jpg" alt="us"class="main-img">>
+</div>
+
+<button onclick="showMessage()">Đôi lời muốn nói 💌</button>
+
+<p id="msg"></p>
+
+<div class="gift" onclick="openGift()">🎁</div>
+
+</div>
+
+<!-- Trái tim lớn -->
+<div class="big-heart"id="bigHeart">
+<pre>
+      💖 💖         💖 💖      
+   💖      💖   💖       💖   
+ 💗          💗           💗  
+ 💕                       💕 
+  💕                     💕  
+   💕                   💕   
+    💕                 💕    
+      💕             💕      
+        💕         💕        
+          💕     💕          
+            💕 💕            
+ ❤️
+      💖 💖         💖 💖      
+   💖      💖   💖       💖   
+ 💗          💗           💗  
+ 💕                       💕 
+  💕                     💕  
+   💕                   💕   
+    💕                 💕    
+      💕             💕      
+        💕         💕        
+          💕     💕          
+            💕 💕            
+ ❤️
+</pre>
+</div>
+<!-- Tim bay -->
+<div id="heart-container"></div>
+
+<!-- Ảnh bay (KHÔNG có img sẵn bên trong) -->
+<div id="photo-surprise"></div>
+<script>
+// ===== TEXT =====
+let messages = [
+"Hello Hoài Hương đẹp gái nháa!!",
+"Hok biết Hương có nhớ tui hok chứ tui nhớ Hương lắm á:3",
+"Bởi dì",
+"You are my everything 💗",
+"You make me happy every day 🌸",
+"I love you very much ❤️",
+"Stay with me forever nhá 💕",
+];
+
+let i = 0;
+
+function showMessage(){
+document.getElementById("msg").innerHTML = messages[i];
+i++;
+if(i >= messages.length) i = 0;
+}
+function openGift(){
+
+  let images = ["hh1.jpg","lhp3.jpg","lhp.jpg","hhm.jpg","lhs.jpg","lhp2.jpg"];
+
+  // 🎯 LẤY TÂM TỪ ẢNH LỚN
+  let main = document.querySelector(".main-img");
+  let rect = main.getBoundingClientRect();
+
+  let centerX = rect.left + rect.width / 2 + window.scrollX;
+  let centerY = rect.top + rect.height / 2 + window.scrollY;
+
+  // 💖 TIM
+  for(let i = 0; i < 90; i++){
+
+    let heart = document.createElement("div");
+    heart.className = "flying-heart";
+    heart.innerHTML = ["💖","💗","💕","❤️","🌸"][Math.floor(Math.random()*5)];
+
+    heart.style.left = centerX + "px";
+    heart.style.top = centerY + "px";
+
+    let x = (Math.random() - 0.5) * 400;
+    let y = (Math.random() - 1) * 300;
+
+    heart.style.setProperty("--x", x + "px");
+    heart.style.setProperty("--y", y + "px");
+
+    heart.style.fontSize = (20 + Math.random()*30) + "px";
+
+    document.getElementById("heart-container").appendChild(heart);
+
+    setTimeout(()=>{ heart.remove(); },4000);
+  }
+
+  // 🖼 ẢNH
+  let total = images.length;
+  let radius = 220;
+
+  for(let i = 0; i < total; i++){
+
+    let img = document.createElement("img");
+    img.src = images[i];
+    img.className = "surprise-img";
+
+    // 🎯 bắt đầu từ tâm ảnh lớn
+    img.style.left = centerX + "px";
+    img.style.top = centerY + "px";
+    img.style.transform = "translate(-50%, -50%)";
+
+    let angle = (i / total) * 2 * Math.PI;
+    let x = Math.cos(angle) * radius;
+    let y = Math.sin(angle) * radius;
+
+    document.getElementById("photo-surprise").appendChild(img);
+
+    // 👉 FIX QUAN TRỌNG: giữ translate(-50%, -50%)
+    setTimeout(() => {
+      img.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
+      img.style.opacity = "1";
+    }, i * 100);
+  }
+}
+// ===== CLICK ENTER =====
+document.getElementById("enter-screen").onclick = function(){
+
+this.style.opacity = "0";
+setTimeout(()=>{
+this.style.display = "none";
+},500);
+
+/* 💖 tim rơi */
+let heart = document.getElementById("bigHeart");
+heart.classList.remove("fall");
+void heart.offsetHeight;
+heart.classList.add("fall");
+
+/* 🎵 phát nhạc */
+document.getElementById("bgMusic").play();
+}
+;
+</script>
+<a href="index.html">Ấn zo deyy</a>
+</body>
+</html>
