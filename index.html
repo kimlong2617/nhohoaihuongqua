@@ -7,8 +7,8 @@
 </head>
 
 <body>
-<audio id="bgmusic" autoplay loop>
-  <source src="CMNDTCTmp3.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop>
+  <source src="CMNDTCT.mp3" type="audio/mpeg">
 </audio>
 <!-- Màn hình vào -->
 <div id="enter-screen">
@@ -163,10 +163,9 @@ void heart.offsetHeight;
 heart.classList.add("fall");
 
 /* 🎵 phát nhạc */
-document.addEventListener ("click", function () {
-    const music = document.getElementById("bgmusic");
-    music.play();
-})
+document.getElementById("enter-screen").onclick = function(){
+  document.getElementById("bgMusic").play();
+}
 }
 ;
 </script>
