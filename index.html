@@ -7,9 +7,16 @@
 </head>
 
 <body>
-<audio id="bgMusic" loop>
+<audio id="bgmusic" autoplay loop>
   <source src="CMNDTCTmp3.mp3" type="audio/mpeg">
 </audio>
+
+<script>
+document.addEventListener("click", function () {
+    const music = document.getElementById("bgmusic");
+    music.play();
+}, { once: true });
+</script>
 <!-- Màn hình vào -->
 <div id="enter-screen">
   <h1>For You 💖</h1>
@@ -163,8 +170,10 @@ void heart.offsetHeight;
 heart.classList.add("fall");
 
 /* 🎵 phát nhạc */
-document.getElementById("bgMusic").play();
-}
+document.addEventListener("click", function () {
+    const music = document.getElementById("bgmusic");
+    music.play();
+}, { once: true });
 }
 ;
 </script>
