@@ -1,207 +1,172 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hỏi vuii</title>
-    
-<style>
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #ffe6f0;
-    font-family: Arial;
-    text-align: center;
-  }
-
-  .box {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  }
-
-  h2 {
-    margin-bottom: 30px;
-  }
-
-  button {
-    padding: 12px 25px;
-    font-size: 18px;
-    margin: 10px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  #yes {
-    background: #ff4d6d;
-    color: white;
-  }
-  #no {
-    background: #ccc;
-  }
- #overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.5s;
-  z-index: 9999;
-}
-
-/* 💖 TIM SIÊU TO */
-.heart {
-  position: relative;
-  width: 400px;
-  height: 400px;
-  background: #ff4d6d;
-  transform: rotate(-45deg);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* 2 phần tròn */
-.heart::before,
-.heart::after {
-  content: "";
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  background: #ff4d6d;
-  border-radius: 50%;
-}
-
-.heart::before {
-  top: -200px;
-  left: 0;
-}
-
-.heart::after {
-  left: 200px;
-  top: 0;
-}
-
-/* 💡 CHỮ TO + ĐẸP */
-.heart-text {
-  position: absolute;
-  z-index: 2;
-
-  transform: rotate(45deg);
-  color: white;
-
-  font-size: 48px; /* 👈 chữ to hơn */
-  font-weight: bold;
-
-  text-align: center;
-  width: 75%;
-  line-height: 1.4;
-
-  text-shadow: 0 0 15px white;
-}
-</style>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+<link rel="stylesheet" href="stylel.css">
 </head>
+
 <body>
 <video id="bgMusic" loop style="display:none;">
   <source src="CMNDTCT.mp4" type="video/mp4">
 </video>
-<script>document.getElementById("bgMusic").play();</script>
-<div id="overlay">
-  <div class="heart">
-    <div class="heart-text">
-      Tui cũm yêuu Beoo nhìuuuu ạaa 💖
-    </div>
-  </div>
+<!-- Màn hình vào -->
+<div id="enter-screen">
+  <h1>For You 💖</h1>
+  <p>Click to enter</p>
 </div>
-<div class="box">
-  <h2>Em có thích tôi không? 😳</h2>
-  <button id="yes">Có 💖</button>
-  <button id="no">Không 😢</button>
+
+<!-- Nội dung chính -->
+<div class="container">
+
+<h1>To My Love 💖</h1>
+
+<div class="image-box">
+  <img src="lhp1.jpg" alt="us"class="main-img">>
+</div>
+
+<button onclick="showMessage()">Đôi lời muốn nói 💌</button>
+
+<p id="msg"></p>
+
+<div class="gift" onclick="openGift()">🎁</div>
+
+</div>
+
+<!-- Trái tim lớn -->
+<div class="big-heart"id="bigHeart">
+<pre>
+      💖 💖         💖 💖      
+   💖      💖   💖       💖   
+ 💗          💗           💗  
+ 💕                       💕 
+  💕                     💕  
+   💕                   💕   
+    💕                 💕    
+      💕             💕      
+        💕         💕        
+          💕     💕          
+            💕 💕            
+ ❤️
+      💖 💖         💖 💖      
+   💖      💖   💖       💖   
+ 💗          💗           💗  
+ 💕                       💕 
+  💕                     💕  
+   💕                   💕   
+    💕                 💕    
+      💕             💕      
+        💕         💕        
+          💕     💕          
+            💕 💕            
+ ❤️
+</pre>
+</div>
+<!-- Tim bay -->
+<div id="heart-container"></div>
+
+<!-- Ảnh bay (KHÔNG có img sẵn bên trong) -->
+<div id="photo-surprise"></div>
 <script>
-let yesBtn = document.getElementById("yes");
-let noBtn = document.getElementById("no");
+// ===== TEXT =====
+let messages = [
+"Hello Hoài Hương đẹp gái nháa!!",
+"Hok biết Hương có nhớ tui hok chứ tui nhớ Hương lắm á:3",
+"Bởi dì",
+"You are my everything 💗",
+"You make me happy every day 🌸",
+"I love you very much ❤️",
+"Stay with me forever nhá 💕",
+];
 
-let yesSize = 1;
-let noSize = 1;
+let i = 0;
 
-noBtn.addEventListener("click", () => {
-  // 👉 nhỏ lại
-  noSize -= 0.1;
-  noBtn.style.transform = `scale(${noSize})`;
+function showMessage(){
+document.getElementById("msg").innerHTML = messages[i];
+i++;
+if(i >= messages.length) i = 0;
+}
+function openGift(){
 
-  // 👉 đổi chữ
-  if(noSize <= 0.9){
-    noBtn.innerText = "Cái gìi 🤨";
-  }
-  if(noSize <= 0.8){
-    noBtn.innerText = "Cho suy nghĩ lạii 😢";
-  }
-  if(noSize <= 0.7){
-    noBtn.innerText = "Tui buồn rồi đó 😭";
-  }
-  if(noSize <= 0.6){
-    noBtn.innerText = "Bấm có đi cho thêm kẹo ănn";
-  }
-  if(noSize <= 0.5){
-    noBtn.innerText = "Dận luonn 😭";
-  }
-  if(noSize <= 0.4){
-    noBtn.innerText = "HuHuHu 😭";
-  }
-  if(noSize <= 0.3){
-    noBtn.innerText = "😭";
-  }
-  // 👉 YES to lên
-  yesSize += 0.3;
-  yesBtn.style.transform = `scale(${yesSize})`;
-  // 🏃‍♂️ NHẢY 1 LẦN SAU KHI CLICK
-  const maxX = window.innerWidth - noBtn.offsetWidth;
-  const maxY = window.innerHeight - noBtn.offsetHeight;
+  let images = ["hh1.jpg","lhp3.jpg","lhp.jpg","hhm.jpg","lhs.jpg","lhp2.jpg"];
 
-  const randomX = Math.random() * maxX;
-  const randomY = Math.random() * maxY;
+  // 🎯 LẤY TÂM TỪ ẢNH LỚN
+  let main = document.querySelector(".main-img");
+  let rect = main.getBoundingClientRect();
 
-  noBtn.style.position = "absolute";
-  noBtn.style.left = randomX + "px";
-  noBtn.style.top = randomY + "px";
-});
+  let centerX = rect.left + rect.width / 2 + window.scrollX;
+  let centerY = rect.top + rect.height / 2 + window.scrollY;
 
-// 👉 YES
-let overlay = document.getElementById("overlay");
-let heartText = document.querySelector(".heart-text");
-yesBtn.addEventListener("click", () => {
-  overlay.style.opacity = "1";
-  overlay.style.pointerEvents = "auto";
+  // 💖 TIM
+  for(let i = 0; i < 90; i++){
 
-  // 💡 đổi chữ theo điều kiện
-  if(noSize <= 1) {
-    heartText.innerText = "Dạa tui cũm yêuu Beoo nhìuuuu 🌸💖";
+    let heart = document.createElement("div");
+    heart.className = "flying-heart";
+    heart.innerHTML = ["💖","💗","💕","❤️","🌸"][Math.floor(Math.random()*5)];
+
+    heart.style.left = centerX + "px";
+    heart.style.top = centerY + "px";
+
+    let x = (Math.random() - 0.5) * 400;
+    let y = (Math.random() - 1) * 300;
+
+    heart.style.setProperty("--x", x + "px");
+    heart.style.setProperty("--y", y + "px");
+
+    heart.style.fontSize = (20 + Math.random()*30) + "px";
+
+    document.getElementById("heart-container").appendChild(heart);
+
+    setTimeout(()=>{ heart.remove(); },4000);
   }
-  if(noSize <= 0.7){
-    heartText.innerText = "Ấn nhầm hơi nhiều ròi nhaa 😏";
-  } 
-  if(noSize <= 0.5) {
-    heartText.innerText = "Dận ròi đi raa 💢";
+
+  // 🖼 ẢNH
+  let total = images.length;
+  let radius = 220;
+
+  for(let i = 0; i < total; i++){
+
+    let img = document.createElement("img");
+    img.src = images[i];
+    img.className = "surprise-img";
+
+    // 🎯 bắt đầu từ tâm ảnh lớn
+    img.style.left = centerX + "px";
+    img.style.top = centerY + "px";
+    img.style.transform = "translate(-50%, -50%)";
+
+    let angle = (i / total) * 2 * Math.PI;
+    let x = Math.cos(angle) * radius;
+    let y = Math.sin(angle) * radius;
+
+    document.getElementById("photo-surprise").appendChild(img);
+
+    // 👉 FIX QUAN TRỌNG: giữ translate(-50%, -50%)
+    setTimeout(() => {
+      img.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
+      img.style.opacity = "1";
+    }, i * 100);
   }
-  if(noSize <= 0.4) {
-    heartText.innerText = "😭💔";
-  }
-});
+}
+// ===== CLICK ENTER =====
+document.getElementById("enter-screen").onclick = function(){
+
+this.style.opacity = "0";
+setTimeout(()=>{
+this.style.display = "none";
+},500);
+
+/* 💖 tim rơi */
+let heart = document.getElementById("bigHeart");
+heart.classList.remove("fall");
+void heart.offsetHeight;
+heart.classList.add("fall");
+
+/* 🎵 phát nhạc */
+document.getElementById("bgMusic").play();
+}
+;
 </script>
-</div>
+<a href="index.html">Ấn zo deyy</a>
 </body>
 </html>
